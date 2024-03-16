@@ -1,7 +1,8 @@
+import 'package:fedserv_task/controller/my_controller.dart';
 import 'package:fedserv_task/view/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
 }
 

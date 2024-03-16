@@ -29,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Sort myList by first names
+    //myList.sort();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorConstant.white,
@@ -41,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView.builder(
-          itemCount: myList.length ~/ 3,
+          itemCount: myList.length ~/ 4,
           itemBuilder: (context, index) => Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
@@ -50,23 +52,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ContactDetailScreen(
-                        Name: myList[index * 3],
-                        phone: myList[index * 3 + 2],
-                        Email: myList[index * 3 + 3],
+                        Name: myList[index * 4 + 0],
+                        phone: myList[index * 4 + 2],
+                        Email: myList[index * 4 + 3],
                       ),
                     ));
               },
               child: ListTile(
                 leading: CircleAvatar(
                   radius: 50,
-                  backgroundColor: Mycolor[index],
+                  backgroundColor: Mycolor[index % Mycolor.length],
                   child: Icon(
                     Icons.person,
                     size: 30,
                     color: ColorConstant.white,
                   ),
                 ),
-                title: Text(myList[index * 3] + myList[index * 3 + 1]),
+                title: Text(myList[index * 4 + 0] + myList[index * 4 + 1]),
               ),
             ),
           ),
@@ -149,6 +151,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             myList.add(SecondNameController.text);
                             myList.add(PhoneController.text);
                             myList.add(EmailController.text);
+                            myList.sort();
+                            //myList.sort((a, b) => a.compareTo(b));
 
                             Navigator.pop(context);
                             FirstNameController.clear();
