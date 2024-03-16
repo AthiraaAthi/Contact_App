@@ -13,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _homeKey = GlobalKey<FormState>();
   List<Color> Mycolor = [
     Color.fromARGB(255, 238, 193, 77),
     Color.fromARGB(255, 136, 241, 140),
@@ -21,12 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
     Color.fromARGB(255, 255, 146, 215)
   ];
 
-  TextEditingController FirstNameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
 
-  TextEditingController SecondNameController = TextEditingController();
+  TextEditingController secondNameController = TextEditingController();
 
-  TextEditingController PhoneController = TextEditingController();
-  TextEditingController EmailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
   List myList = [];
   EditingController obj = EditingController();
@@ -71,118 +72,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           MaterialPageRoute(
                             builder: (context) => ContactDetailScreen(
                               OnPressEdit: () async {
-                                showModalBottomSheet(
-                                  isScrollControlled: true,
+                                ////////////////////////ON EDIT PRESS
+                                showbottomsheet(
                                   context: context,
-                                  builder: (context) => Padding(
-                                    padding: EdgeInsets.only(
-                                        bottom: MediaQuery.of(context)
-                                            .viewInsets
-                                            .bottom),
-                                    child: Container(
-                                      height: 400,
-                                      width: 200,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            TextFormField(
-                                              controller: FirstNameController,
-                                              decoration: InputDecoration(
-                                                  prefixIcon:
-                                                      Icon(Icons.person),
-                                                  hintText: "First Name",
-                                                  border: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors.grey),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20))),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            TextFormField(
-                                              controller: SecondNameController,
-                                              decoration: InputDecoration(
-                                                  hintText: "Last Name",
-                                                  border: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors.grey),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20))),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            TextFormField(
-                                              controller: PhoneController,
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              decoration: InputDecoration(
-                                                  prefixIcon: Icon(Icons.call),
-                                                  hintText: "Phone",
-                                                  border: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors.grey),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20))),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            TextFormField(
-                                              controller: EmailController,
-                                              keyboardType:
-                                                  TextInputType.emailAddress,
-                                              decoration: InputDecoration(
-                                                  prefixIcon: Icon(Icons.mail),
-                                                  hintText: "Email",
-                                                  border: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors.grey),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20))),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            ElevatedButton(
-                                                style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStatePropertyAll(
-                                                            ColorConstant
-                                                                .defaultBlue)),
-                                                onPressed: () async {
-                                                  await obj.EditScreen(
-                                                      FirstNameController.text,
-                                                      SecondNameController.text,
-                                                      PhoneController.text,
-                                                      EmailController.text,
-                                                      obj.data[index]["id"]);
-                                                  Navigator.pop(context);
-                                                  fetchData();
-
-                                                  FirstNameController.clear();
-                                                  SecondNameController.clear();
-                                                  PhoneController.clear();
-                                                  EmailController.clear();
-
-                                                  //setState(() {});
-                                                },
-                                                child: Text("Save"))
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  index: index,
+                                  firstname: obj.data[index]["name"],
+                                  lastName: obj.data[index]["name2"],
+                                  email: obj.data[index]["email"],
+                                  phone: obj.data[index]["phone"],
                                 );
                               },
                               Name: obj.data[index]["name"],
@@ -267,95 +164,146 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
               child: Container(
-                height: 400,
+                height: 430,
                 width: 200,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(20)),
                 child: Padding(
                   padding: const EdgeInsets.all(10),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextFormField(
-                        controller: FirstNameController,
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.person),
-                            hintText: "First Name",
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(20))),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: SecondNameController,
-                        decoration: InputDecoration(
-                            hintText: "Last Name",
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(20))),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: PhoneController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.call),
-                            hintText: "Phone",
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(20))),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: EmailController,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.mail),
-                            hintText: "Email",
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(20))),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
-                                  ColorConstant.defaultBlue)),
-                          onPressed: () async {
-                            await obj.AddScreen(
-                              name: FirstNameController.text.toString(),
-                              name2: SecondNameController.text.toString(),
-                              phone: PhoneController.text.toString(),
-                              email: EmailController.text.toString(),
-                            );
-                            Navigator.pop(context);
-                            fetchData();
+                  child: Form(
+                    key: _homeKey,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "it cant be mt";
+                              } else if (value.length <= 3) {
+                                return "characters should be atleast 3";
+                              } else if (value == secondNameController.text) {
+                                return "it shouldn't b the same";
+                              } else {
+                                return null;
+                              }
+                            },
+                            controller: firstNameController,
+                            decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.person),
+                                hintText: "First Name",
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(20))),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "it cant be mt";
+                              } else if (value.length <= 3) {
+                                return "characters should be atleast 3";
+                              } else if (value == firstNameController.text) {
+                                return "it shouldn't b the same";
+                              } else {
+                                return null;
+                              }
+                            },
+                            controller: secondNameController,
+                            decoration: InputDecoration(
+                                hintText: "Last Name",
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(20))),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "it cant be mt";
+                              } else if (value.length < 10) {
+                                return "characters must be atleast 10";
+                              } else if (!(value.startsWith("6") ||
+                                  value.startsWith("7") ||
+                                  value.startsWith("8") ||
+                                  value.startsWith("9"))) {
+                                return "number should start with 6,7,8,9";
+                              } else {
+                                return null;
+                              }
+                            },
+                            controller: phoneController,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.call),
+                                hintText: "Phone",
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(20))),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "it cant be mt";
+                              } else if (!value.contains("@")) {
+                                return "enter a valid email!";
+                              } else {
+                                return null;
+                              }
+                            },
+                            controller: emailController,
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.mail),
+                                hintText: "Email",
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(20))),
+                          ),
+                          // SizedBox(
+                          //   height: 20,
+                          // ),
+                          ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      ColorConstant.defaultBlue)),
+                              onPressed: () async {
+                                if (_homeKey.currentState!.validate()) {
+                                  await obj.AddScreen(
+                                    name: firstNameController.text.toString(),
+                                    name2: secondNameController.text.toString(),
+                                    phone: phoneController.text.toString(),
+                                    email: emailController.text.toString(),
+                                  );
+                                  Navigator.pop(context);
+                                  fetchData();
+                                  firstNameController.clear();
+                                  secondNameController.clear();
+                                  phoneController.clear();
+                                  emailController.clear();
 
-                            // myList.add(FirstNameController.text);
-                            // myList.add(SecondNameController.text);
-                            // myList.add(PhoneController.text);
-                            // myList.add(EmailController.text);
+                                  //setState(() {});
+                                }
 
-                            //myList.sort();
-                            //myList.sort((a, b) => a.compareTo(b));
+                                // myList.add(FirstNameController.text);
+                                // myList.add(SecondNameController.text);
+                                // myList.add(PhoneController.text);
+                                // myList.add(EmailController.text);
 
-                            FirstNameController.clear();
-                            SecondNameController.clear();
-                            PhoneController.clear();
-                            EmailController.clear();
-
-                            setState(() {});
-                          },
-                          child: Text("Save"))
-                    ],
+                                //myList.sort();
+                                //myList.sort((a, b) => a.compareTo(b));
+                              },
+                              child: Text("Save"))
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -366,6 +314,116 @@ class _HomeScreenState extends State<HomeScreen> {
           Icons.add,
           color: ColorConstant.black,
           size: 30,
+        ),
+      ),
+    );
+  }
+
+  showbottomsheet(
+      {required BuildContext context,
+      required int index,
+      required String firstname,
+      required String lastName,
+      required String phone,
+      required String email}) {
+    firstNameController.text = firstname;
+    secondNameController.text = lastName;
+    phoneController.text = phone;
+    emailController.text = email;
+    return showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (context) => Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Container(
+          height: 400,
+          width: 200,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "please enter a name";
+                    } else if (value.length <= 3) {
+                      return "Name must be longer than 3 characters";
+                    } else if (value == firstNameController.text) {
+                      return "Name must be different from the previous one";
+                    }
+                    return null;
+                  },
+                  controller: firstNameController,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person),
+                      hintText: "First Name",
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(20))),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: secondNameController,
+                  decoration: InputDecoration(
+                      hintText: "Last Name",
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(20))),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: phoneController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.call),
+                      hintText: "Phone",
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(20))),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.mail),
+                      hintText: "Email",
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(20))),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                            ColorConstant.defaultBlue)),
+                    onPressed: () async {
+                      await obj.EditScreen(
+                          firstNameController.text,
+                          secondNameController.text,
+                          phoneController.text,
+                          emailController.text,
+                          obj.data[index]["id"]);
+                      Navigator.pop(context);
+                      fetchData();
+
+                      //setState(() {});
+                    },
+                    child: Text("Save"))
+              ],
+            ),
+          ),
         ),
       ),
     );
