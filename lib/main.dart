@@ -3,6 +3,8 @@ import 'package:fedserv_task/view/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EditingController.initializeDb();
   runApp(MyApp());
 }
 

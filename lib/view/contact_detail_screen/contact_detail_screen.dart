@@ -1,16 +1,28 @@
+import 'package:fedserv_task/controller/my_controller.dart';
 import 'package:fedserv_task/utils/color_constant/color_constant.dart';
 import 'package:fedserv_task/view/edit_screen/edit_screen.dart';
 import 'package:flutter/material.dart';
 
-class ContactDetailScreen extends StatelessWidget {
+class ContactDetailScreen extends StatefulWidget {
   const ContactDetailScreen(
       {super.key,
       required this.Name,
       required this.phone,
-      required this.Email});
+      required this.Email,
+      this.OnPressDelete,
+      this.OnPressEdit});
   final String Name;
   final String phone;
   final String Email;
+  final void Function()? OnPressDelete;
+  final void Function()? OnPressEdit;
+
+  @override
+  State<ContactDetailScreen> createState() => _ContactDetailScreenState();
+}
+
+class _ContactDetailScreenState extends State<ContactDetailScreen> {
+  EditingController obj = EditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +41,7 @@ class ContactDetailScreen extends StatelessWidget {
             )),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditScreen(),
-                    ));
-              },
+              onPressed: widget.OnPressEdit,
               icon: Icon(
                 Icons.edit,
                 size: 30,
@@ -48,6 +54,16 @@ class ContactDetailScreen extends StatelessWidget {
               onPressed: () {},
               icon: Icon(
                 Icons.star_outline,
+                color: ColorConstant.black,
+                size: 30,
+              )),
+          SizedBox(
+            width: 15,
+          ),
+          IconButton(
+              onPressed: widget.OnPressDelete,
+              icon: Icon(
+                Icons.delete,
                 color: ColorConstant.black,
                 size: 30,
               )),
@@ -72,7 +88,7 @@ class ContactDetailScreen extends StatelessWidget {
               height: 50,
             ),
             Text(
-              Name,
+              widget.Name,
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             SizedBox(
@@ -111,7 +127,7 @@ class ContactDetailScreen extends StatelessWidget {
                               Icons.phone,
                               size: 30,
                             ),
-                            title: Text(phone),
+                            title: Text(widget.phone),
                             subtitle: Text("Phone"),
                           ),
                           ListTile(
@@ -119,7 +135,7 @@ class ContactDetailScreen extends StatelessWidget {
                               Icons.mail,
                               size: 30,
                             ),
-                            title: Text(Email),
+                            title: Text(widget.Email),
                             subtitle: Text("Phone"),
                           ),
                         ],
