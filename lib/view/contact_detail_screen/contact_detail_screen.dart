@@ -3,7 +3,14 @@ import 'package:fedserv_task/view/edit_screen/edit_screen.dart';
 import 'package:flutter/material.dart';
 
 class ContactDetailScreen extends StatelessWidget {
-  const ContactDetailScreen({super.key});
+  const ContactDetailScreen(
+      {super.key,
+      required this.Name,
+      required this.phone,
+      required this.Email});
+  final String Name;
+  final String phone;
+  final String Email;
 
   @override
   Widget build(BuildContext context) {
@@ -65,19 +72,62 @@ class ContactDetailScreen extends StatelessWidget {
               height: 50,
             ),
             Text(
-              "Name",
+              Name,
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 30,
             ),
             Container(
-              height: 100,
+              height: 240,
               width: 400,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Color.fromARGB(255, 230, 224, 224)),
-              child: Column(),
+                  color: ColorConstant.defaultGrey),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          "Contact info",
+                          style: TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      height: 160,
+                      width: 380,
+                      decoration: BoxDecoration(color: Colors.transparent),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            leading: Icon(
+                              Icons.phone,
+                              size: 30,
+                            ),
+                            title: Text(phone),
+                            subtitle: Text("Phone"),
+                          ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.mail,
+                              size: 30,
+                            ),
+                            title: Text(Email),
+                            subtitle: Text("Phone"),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
             )
           ],
         ),

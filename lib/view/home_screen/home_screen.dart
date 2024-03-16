@@ -49,7 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ContactDetailScreen(),
+                      builder: (context) => ContactDetailScreen(
+                        Name: myList[index * 3],
+                        phone: myList[index * 3 + 2],
+                        Email: myList[index * 3 + 3],
+                      ),
                     ));
               },
               child: ListTile(
@@ -62,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: ColorConstant.white,
                   ),
                 ),
-                title: Text(myList[index * 3]),
+                title: Text(myList[index * 3] + myList[index * 3 + 1]),
               ),
             ),
           ),
@@ -127,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         controller: EmailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.call),
+                            prefixIcon: Icon(Icons.mail),
                             hintText: "Email",
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.grey),
