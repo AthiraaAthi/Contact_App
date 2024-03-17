@@ -138,7 +138,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
                               size: 30,
                             ),
                             title: Text(widget.Email),
-                            subtitle: Text("Phone"),
+                            subtitle: Text("Email"),
                           ),
                         ],
                       ),

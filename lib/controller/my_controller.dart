@@ -30,6 +30,14 @@ class EditingController with ChangeNotifier {
     notifyListeners();
   }
 
+  // Fetch contacts sorted by name in alphabetical order
+  Future<List<Map<String, dynamic>>> fetchSortedContacts() async {
+    notifyListeners();
+    final Database db = await database;
+
+    return await db.query('Student', orderBy: 'name ASC');
+  }
+
   getAllData() async {
     data = await database.rawQuery('SELECT * FROM Student');
     notifyListeners();

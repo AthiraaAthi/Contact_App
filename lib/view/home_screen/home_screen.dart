@@ -38,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     fetchData();
+    sort();
     super.initState();
   }
 
@@ -47,11 +48,16 @@ class _HomeScreenState extends State<HomeScreen> {
     // setState(() {});
   }
 
+  Future<void> sort() async {
+    await Provider.of<EditingController>(context, listen: false)
+        .fetchSortedContacts();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final obj = Provider.of<EditingController>(context);
-    // Sort myList by first names
-    //myList.sort();
+    //obj.data.sort();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorConstant.white,
@@ -489,6 +495,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   secondNameController.clear();
                                   phoneController.clear();
                                   emailController.clear();
+
+                                  sort();
 
                                   fetchData();
 
