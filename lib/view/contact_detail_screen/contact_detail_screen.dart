@@ -10,10 +10,12 @@ class ContactDetailScreen extends StatefulWidget {
       required this.phone,
       required this.Email,
       this.OnPressDelete,
-      this.OnPressEdit});
+      this.OnPressEdit,
+      required this.color});
   final String Name;
   final String phone;
   final String Email;
+  final Color color;
   final void Function()? OnPressDelete;
   final void Function()? OnPressEdit;
 
@@ -76,7 +78,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
             Center(
               child: CircleAvatar(
                 radius: 100,
-                backgroundColor: Colors.amber,
+                backgroundColor: widget.color,
                 child: Icon(
                   Icons.person,
                   size: 80,

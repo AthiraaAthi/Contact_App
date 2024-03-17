@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
-class EditingController {
+class EditingController with ChangeNotifier {
   static late Database database;
   //static function ne name vch call chyam using dot
   List data = [];
@@ -26,10 +27,12 @@ class EditingController {
     await database.rawInsert(
         'INSERT INTO Student(name, name2, phone, email) VALUES(?, ?, ?, ?)',
         [name, name2, phone, email]);
+    notifyListeners();
   }
 
   getAllData() async {
     data = await database.rawQuery('SELECT * FROM Student');
+    notifyListeners();
   }
 
   EditScreen(
@@ -37,9 +40,13 @@ class EditingController {
     await database.rawUpdate(
         'UPDATE Student SET name = ?, name2 = ?, phone = ?, email = ? WHERE id = ?',
         [name, name2, phone, email, id]);
+    notifyListeners();
   }
 
   DeleteScreen(int id) async {
     await database.rawDelete('DELETE FROM Student WHERE id = ?', [id]);
+    notifyListeners();
   }
+
+  notifyListeners();
 }
